@@ -4,6 +4,7 @@ import 'express-async-errors';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import AppError from '@shared/errors/AppError';
+import router from './routes';
 
 dotenv.config();
 
@@ -11,12 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  return res.status(200).send({
-    message: 'Bem vindo',
-  });
-});
+app.use(router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof AppError) {
