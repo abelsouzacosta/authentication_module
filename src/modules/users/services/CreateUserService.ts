@@ -26,6 +26,8 @@ export default class CreateUserService {
       password: passwordHash,
     });
 
+    await repository.save(user);
+
     return user;
   }
 }
