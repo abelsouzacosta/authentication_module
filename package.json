@@ -1,0 +1,7 @@
+{
+  "name": "users_module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Abel Souza Costa Junior <abelsouzacosta@gmail.com>",
+  "license": "MIT"
+}
