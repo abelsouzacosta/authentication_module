@@ -5,11 +5,13 @@ import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 import uploadConfig from '@config/upload';
 import multer from 'multer';
 import UpdateAvatarController from '../controllers/UpdateAvatarController';
+import ProfileController from '../controllers/ProfileController';
 
 const userRouter = Router();
 const userController = new UsersController();
 const upload = multer(uploadConfig);
 const avatarController = new UpdateAvatarController();
+const profileController = new ProfileController();
 
 userRouter.get('/', isAuthenticated, userController.index);
 
@@ -32,5 +34,9 @@ userRouter.patch(
   upload.single('avatar'),
   avatarController.update,
 );
+
+userRouter.get('/show_profile', isAuthenticated, profileController.show);
+
+userRouter.post('/update_profile', isAuthenticated, profileController.update);
 
 export default userRouter;
