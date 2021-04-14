@@ -23,18 +23,13 @@ interface ISendMail {
   templateData: IParseEmailTemplate;
 }
 
-interface IResponse {
-  id: string;
-  url: string | false;
-}
-
 export default class EtherealEmailConfig {
   static async sendMail({
     to,
     from,
     subject,
     templateData,
-  }: ISendMail): Promise<IResponse> {
+  }: ISendMail): Promise<string | false> {
     const account = await nodemailer.createTestAccount();
 
     if (!account) throw new AppError('Email account not created');
@@ -65,12 +60,8 @@ export default class EtherealEmailConfig {
       html: await mailTemplate.parse(templateData),
     });
 
-    const messageID = message.messageID;
     const messageUrl = nodemailer.getTestMessageUrl(message);
 
-    return {
-      id: messageID,
-      url: messageUrl,
-    };
+    return messageUrl;
   }
 }
