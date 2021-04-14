@@ -53,6 +53,8 @@ export default class UpdateProfileService {
       user.email = email;
     }
 
+    if (name) user.name = name;
+
     await repository.save(user);
 
     return user;
